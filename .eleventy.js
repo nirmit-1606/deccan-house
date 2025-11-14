@@ -3,6 +3,7 @@ const { DateTime } = require("luxon");
 module.exports = function(eleventyConfig) {
   // Copy CSS to the output folder
   eleventyConfig.addPassthroughCopy("css");
+  eleventyConfig.addPassthroughCopy("src/images");
 
   // ✅ Add a date filter for templates
   eleventyConfig.addNunjucksFilter("date", function(dateObj, format = "yyyy") {
