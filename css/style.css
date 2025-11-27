@@ -155,27 +155,30 @@ header nav {
 /* About section */
 
 .about {
+  padding: 8rem 2rem;
+}
+
+.about .about-content {
   display: grid;
   grid-template-columns: 1fr 450px;
-  gap: 2rem;
+  gap: 6rem;
   align-items: center;
   flex-wrap: nowrap;
-  padding: 4rem 2rem;
-  min-height: 70vh;
-
   max-width: 1400px;
   margin: 0 auto;
 }
 
-.about .col-content {
+/* 2 column layout with image */
+
+.col-content {
   min-width: 100px;
-  max-width: 600px;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.about .col-img {
+.col-img {
   height: 400px;
   width: 100%;
   max-width: 450px;
@@ -183,11 +186,32 @@ header nav {
   border-radius: 8px;
 }
 
-.about .col-img img {
+.col-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+/* Chef's Special section */
+
+.chefs-special {
+  background: #383F0D;
+  padding: 8rem 2rem;
+}
+
+.chefs-special .chefs-special-content {
+  display: grid;
+  grid-template-columns: 450px 1fr;
+  gap: 6rem;
+  align-items: center;
+  flex-wrap: nowrap;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.chefs-special .col-content {
+  color: #FEF7E0;
 }
 
 /* Responsive adjustments */
@@ -204,13 +228,13 @@ header nav {
     font-size: 1rem;
   }
 
-  .about {
+  .about .about-content, .chefs-special .chefs-special-content {
     grid-template-columns: 1fr;
-    padding: 3rem 1rem;
-    min-height: auto;
+    gap: 3rem;
   }
 
-  .about .col-img {
+  .col-img {
+    order: -1;
     height: 400px;
     max-width: 100%;
     width: 100%;
