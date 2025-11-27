@@ -1,14 +1,39 @@
-body {
-  font-family: 'Poppins', sans-serif;
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #283618;
-  background: #FEFAE0;
 }
 
+body {
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  letter-spacing: 0.04rem;
+  color: #283618;
+  background: #FEF7E0;
+}
+
+/* Component styles */
+
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #B7571F;
+  color: #FEF7E0;
+  border-radius: 5px;
+  text-decoration: none;
+  border: 2px solid #DC7337;
+  transition: all 0.4s ease;
+}
+
+.btn:hover {
+  background-color: #DC7337;
+  border: 2px solid #EC8D56;
+}
+
+/* Header styles */
+
 header {
-  background: #606c38;
-  color: #FEFAE0;
+  background: #6B7621;
+  color: #FEF7E0;
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -34,53 +59,71 @@ header nav {
 }
 
 .nav__link {
-  color: #DDA15E;
+  color: #FBC488;
   text-decoration: none;
   padding: 0.25rem 0.25rem;
   transition: color 0.15s ease;
 }
 .nav__link:hover {
-  color: #FEFAE0;
+  color: #FEF7E0;
 }
 .nav__link--active {
-  color: #FEFAE0;
+  color: #FEF7E0;
   border-bottom: 2px solid currentColor;
 }
 
+/* Hero section */
+
 .hero {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+
   padding: 5rem 1rem;
   background: url('/images/hero.jpg') center/cover no-repeat;
   position: relative;
-  color: #FEFAE0;
-  height: 75vh;
+  text-align: center;
+  color: #FEF7E0;
+  height: 95vh;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  & h1 {
+    font-weight: bold;
+    font-size: 6rem;
+    margin-bottom: -2rem;
+  }
+
+  & h2 {
+    font-weight: normal;
+    font-size: 2.5rem;
+  }
+
+  & p {
+    font-size: 1.25rem;
+  }
+
+  & .button-row {
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6); /* Adjust opacity as needed */
-}
-
-.hero h1,
-.hero p,
-.hero .btn {
+.hero > * {
   position: relative;
   z-index: 1;
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #BC6C25;
-  color: #FEFAE0;
-  border-radius: 5px;
-  text-decoration: none;
-  border: 1px solid rgba(254, 250, 224, 0.2);
 }
 
 .about {
