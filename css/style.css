@@ -23,24 +23,25 @@ body {
 }
 
 .primary-btn {
-  background: #B7571F;
+  background: #E5530F;
   color: #FEF7E0;
-  border: 2px solid #DC7337;
+  border: 2px solid #FD7536;
 }
 
 .primary-btn:hover {
-  background-color: #DC7337;
-  border: 2px solid #EC8D56;
+  background-color: #CD490B;
+  border: 2px solid #F96520;
 }
 
 .secondary-btn {
   color: #2F3D1F;
-  border: 2px solid #DC7337;
+  border: 2px solid #F96520;
 }
 
 .secondary-btn:hover {
-  background-color: #dc733773;
-  border: 2px solid #DC7337;
+  background-color: #F96520;
+  color: #FEF7E0;
+  border: 2px solid #CD490B;
 }
 
 /* Header styles */
