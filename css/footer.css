@@ -67,9 +67,12 @@ footer .footer-grid .info-block h3::after {
     grid-row: auto;
   }
 
+  footer .footer-grid .info-block h3 {
+    margin-bottom: 0.2rem;
+  }
+
   footer .footer-grid .info-block h3::after {
-    width: calc(100% + 12px);
+    width: 35%;
     bottom: -0.35rem;
-    height: 2px;
   }
 }

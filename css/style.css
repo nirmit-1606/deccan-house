@@ -163,7 +163,40 @@ body {
   color: #FEF7E0;
 }
 
+/* Food images section */
+
+.food-images {
+  padding: 6rem 2rem;
+}
+
+.food-images .food-images-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.food-images img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
 /* Responsive adjustments */
+@media (max-width: 1300px) {
+  .food-images .food-images-content {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .food-images img {
+    height: 300px;
+  }
+}
+
 @media (max-width: 1000px) {
   .hero h1 {
     font-size: 4.5rem;
