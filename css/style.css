@@ -194,6 +194,12 @@ body {
   flex: 0 0 auto;                  /* prevent children from shrinking or stretching */
 }
 
+.menu-carousal .carousal-icon {
+  width: 3.5rem;
+  object-fit: contain;
+  display: block;
+}
+
 /* animation moves left by half the track width (requires two identical halves) */
 @keyframes carousal-scroll {
   from { transform: translateX(0); }
@@ -232,6 +238,14 @@ body {
   .food-images img {
     height: 300px;
   }
+
+  .menu-carousal {
+    padding: 1.5rem 2rem;
+  }
+
+  .menu-carousal .carousal-icon {
+    width: 3rem;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -258,6 +272,19 @@ body {
     max-width: 100%;
     width: 100%;
   }
+
+  .menu-carousal {
+    padding: 1rem 2rem;
+    font-size: large;
+  }
+
+  .menu-carousal .carousal-track {
+    gap: 3rem;
+  }
+
+  .menu-carousal .carousal-icon {
+    width: 2.5rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -271,5 +298,17 @@ body {
 
   .hero {
     padding: 4rem 0.75rem;
+  }
+
+  .menu-carousal {
+    font-size: medium;
+  }
+
+  .menu-carousal .carousal-track {
+    gap: 2.5rem;
+  }
+
+  .menu-carousal .carousal-icon {
+    width: 2rem;
   }
 }
