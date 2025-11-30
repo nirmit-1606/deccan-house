@@ -163,6 +163,43 @@ body {
   color: #FEF7E0;
 }
 
+/* Carousal */
+
+.menu-carousal {
+  background-color: #1C1F04;
+  color: #FEF7E0;
+  padding: 2rem 3rem;
+  overflow: hidden;
+  --scroll-duration: 40s;
+
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.menu-carousal .carousal-track {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+  white-space: nowrap;
+  
+  width: max-content;
+  transform: translate3d(0,0,0);
+  will-change: transform;
+
+  /* animation will be turned on by JS after duplicating content to avoid jump */
+  animation: none;
+}
+
+.menu-carousal .carousal-track > * {
+  flex: 0 0 auto;                  /* prevent children from shrinking or stretching */
+}
+
+/* animation moves left by half the track width (requires two identical halves) */
+@keyframes carousal-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* Food images section */
 
 .food-images {
