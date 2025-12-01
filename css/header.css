@@ -1,13 +1,25 @@
 header {
   background: #6B7621;
   color: #FEF7E0;
-  padding: 1rem 2rem;
 
   position: sticky;
   top: 0;
   z-index: 1000;
 
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+  --header-padding-y: 1rem;
+  --header-padding-y-min: 0.5rem;
+  --h1-size: 1.2rem;
+  --h1-size-min: 0.9rem;
+  --logo-width: 50px;
+  --logo-width-min: 36px;
+
+  /* allow smooth transitions when computed properties change */
+  transition: padding 200ms ease, box-shadow 200ms ease, background 200ms ease;
+  padding: calc(var(--header-padding-y) - (var(--header-padding-y) - var(--header-padding-y-min)) * var(--shrink, 0)) 2rem;
+}
+
+header.header--pinned {
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25);
 }
 
 header .header-content {
@@ -21,8 +33,19 @@ header .header-content {
 }
 
 header h1 {
-  margin: 0;
-  font-size: 1.5rem;
+  font-size: calc(var(--h1-size) - (var(--h1-size) - var(--h1-size-min)) * var(--shrink, 0));
+  transition: font-size 180ms ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header h1 img {
+  width: calc(var(--logo-width) - (var(--logo-width) - var(--logo-width-min)) * var(--shrink, 0));
+  height: auto;
+  transition: width 180ms ease;
+  object-fit: contain;
+  display: block;
 }
 
 header nav {

@@ -55,7 +55,7 @@ body {
   position: relative;
   text-align: center;
   color: #FEF7E0;
-  min-height: 95vh;
+  min-height: 88vh;
 }
 
 .hero::before {
