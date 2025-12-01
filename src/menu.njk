@@ -4,9 +4,16 @@ title: Menu
 ---
 <section>
   <h2>Deccan House Menu</h2>
-  <div>
-    <a href="#" class="btn">Breakfast</a>
-    <a href="#" class="btn">Lunch</a>
-    <a href="#" class="btn">Dinner</a>
+  {% for item in menu %}
+  <div class="menu-item">
+    <h3>{{ item.name }}</h3>
+    <p>Category: {{ item.category }}</p>
+    <p>${{ item.price }}</p>
+    <p>{{ item.description }}</p>
+
+    {% if item.image %}
+      <img src="{{ item.image }}" alt="{{ item.name }}">
+    {% endif %}
   </div>
+{% endfor %}
 </section>
