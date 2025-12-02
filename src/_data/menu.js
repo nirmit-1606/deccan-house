@@ -18,7 +18,7 @@ module.exports = async function() {
       name: item.properties.Name.title[0]?.plain_text,
       price: item.properties.Price.number,
       category: item.properties.Category.select?.name,
-      description: item.properties.Description.rich_text[0]?.plain_text
+      description: item.properties.Description.rich_text[0]?.plain_text || "",
     };
   });
 };

@@ -5,10 +5,17 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   font-family: "Trebuchet MS", Helvetica, sans-serif;
   letter-spacing: 0.04rem;
   color: #283618;
   background: #FEF7E0;
+}
+
+main {
+  flex: 1;
 }
 
 /* Component styles */

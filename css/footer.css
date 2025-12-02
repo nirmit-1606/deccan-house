@@ -1,7 +1,7 @@
 footer {
-    background-color: #6B7621;
-    color: #FEF7E0;
-    padding: 3rem 2rem 1rem 2rem;
+  background-color: #6B7621;
+  color: #FEF7E0;
+  padding: 3rem 2rem 1rem 2rem;
 }
 
 footer .footer-content {
@@ -15,7 +15,8 @@ footer .footer-content {
 
 footer .footer-content .footer-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* left column for logo, two columns for the other items */
+  grid-template-columns: 1fr 1fr 1fr;
+  /* left column for logo, two columns for the other items */
   grid-template-rows: auto auto;
   gap: 2rem;
   align-items: start;
@@ -40,7 +41,8 @@ footer .footer-grid .info-block {
 
 footer .footer-grid .info-block h3 {
   position: relative;
-  display: inline-block; /* sizes to heading width */
+  display: inline-block;
+  /* sizes to heading width */
   margin-bottom: 0.6rem;
   color: inherit;
 }
@@ -49,10 +51,13 @@ footer .footer-grid .info-block h3::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -0.45rem;            /* spacing under the heading */
-  width: 50%;   /* slightly longer than the heading */
+  bottom: -0.45rem;
+  /* spacing under the heading */
+  width: 50%;
+  /* slightly longer than the heading */
   height: 0.15rem;
-  background: #F8E39D; /* adjust color/opacity to taste */
+  background: #F8E39D;
+  /* adjust color/opacity to taste */
   border-radius: 2px;
 }
 

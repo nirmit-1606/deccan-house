@@ -2,18 +2,18 @@
 layout: layout.njk
 title: Menu
 ---
-<section>
-  <h2>Deccan House Menu</h2>
-  {% for item in menu %}
-  <div class="menu-item">
-    <h3>{{ item.name }}</h3>
-    <p>Category: {{ item.category }}</p>
-    <p>${{ item.price }}</p>
-    <p>{{ item.description }}</p>
+<section class="menu">
+  <h2>Our Menu</h2>
 
-    {% if item.image %}
-      <img src="{{ item.image }}" alt="{{ item.name }}">
-    {% endif %}
+  <div class="menu-content">
+    <!-- JS will populate unique categories -->
+    <div id="menu-categories"></div>
+
+    <!-- JS will populate filtered items -->
+    <div id="menu-items"></div>
   </div>
-{% endfor %}
 </section>
+
+<script>
+  window.menuData = {{ menu | dump | safe }};
+</script>

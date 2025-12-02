@@ -6,6 +6,7 @@
   <title>{{ title or "Deccan House" }}</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/about.css">
+  <link rel="stylesheet" href="/css/menu.css">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/footer.css">
 </head>
@@ -15,6 +16,10 @@
     {{ content | safe }}
   </main>
   {% include "partials/footer.njk" %}
+
+  {% if page.fileSlug == "menu" %}
+    <script src="/js/menu.js"></script>
+  {% endif %}
 
   <script>
   // animate header size on scroll using a CSS custom property --shrink (0..1)
