@@ -1,8 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
     const header = document.querySelector("header");
+    const content = document.querySelector("main");
     const btn = document.getElementById("hamburgerBtn");
     const nav = document.getElementById("mobileResponsive");
     const overlay = document.getElementById("navOverlay");
+
+    // Adjust main content padding to header height for mobile layouts
+    function adjustPadding() {
+        if (window.matchMedia("(max-width: 480px)").matches) {
+            const height = header.offsetHeight;
+            content.style.paddingTop = height + "px";
+        } else {
+            content.style.paddingTop = "0px";
+        }
+    }
+
+    window.addEventListener("resize", adjustPadding);
+    window.addEventListener("load", adjustPadding);
 
     /* MOBILE NAV MENU TOGGLE */
 
