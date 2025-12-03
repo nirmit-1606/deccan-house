@@ -14,6 +14,11 @@ body {
   background: #FEF7E0;
 }
 
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
 main {
   flex: 1;
 }
@@ -27,6 +32,7 @@ main {
   text-decoration: none;
   transition: all 0.4s ease;
   width: fit-content;
+  font-size: 1rem;
 }
 
 .primary-btn {
@@ -188,17 +194,18 @@ main {
   gap: 4rem;
   align-items: center;
   white-space: nowrap;
-  
+
   width: max-content;
-  transform: translate3d(0,0,0);
+  transform: translate3d(0, 0, 0);
   will-change: transform;
 
   /* animation will be turned on by JS after duplicating content to avoid jump */
   animation: none;
 }
 
-.menu-carousal .carousal-track > * {
-  flex: 0 0 auto;                  /* prevent children from shrinking or stretching */
+.menu-carousal .carousal-track>* {
+  flex: 0 0 auto;
+  /* prevent children from shrinking or stretching */
 }
 
 .menu-carousal .carousal-icon {
@@ -209,8 +216,13 @@ main {
 
 /* animation moves left by half the track width (requires two identical halves) */
 @keyframes carousal-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 /* Food images section */
@@ -268,7 +280,8 @@ main {
     font-size: 1rem;
   }
 
-  .about .about-content, .chefs-special .chefs-special-content {
+  .about .about-content,
+  .chefs-special .chefs-special-content {
     grid-template-columns: 1fr;
     gap: 3rem;
   }
@@ -294,7 +307,22 @@ main {
   }
 }
 
+@media (max-width: 680px) {
+  .btn {
+    font-size: 0.9rem;
+  }
+
+  .food-images .food-images-content {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
+  }
+}
+
 @media (max-width: 480px) {
+  .hero {
+    height: 100vh;
+  }
+
   .hero h1 {
     font-size: 3rem;
   }
@@ -317,5 +345,14 @@ main {
 
   .menu-carousal .carousal-icon {
     width: 2rem;
+  }
+
+  .food-images .food-images-content {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .food-images img {
+    height: 180px;
   }
 }
