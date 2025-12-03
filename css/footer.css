@@ -13,33 +13,35 @@ footer .footer-content {
   margin: 0 auto;
 }
 
-footer .footer-content .footer-grid {
+footer .footer-content .footer-grid-1-3 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  /* left column for logo, two columns for the other items */
-  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 3fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+footer .footer-content .footer-grid-1-1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
   align-items: start;
 }
 
-footer .footer-grid .logo {
-  grid-column: 1 / 2;
-  grid-row: 1 / 3;
-}
-
-footer .footer-grid .logo img {
-  width: 250px;
+footer .logo img {
+  width: 200px;
   height: auto;
   display: block;
 }
 
-footer .footer-grid .info-block {
+footer .info-block {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.1rem;
+  line-height: 1.5;
+  max-width: 450px;
 }
 
-footer .footer-grid .info-block h3 {
+footer .info-block h3 {
   position: relative;
   display: inline-block;
   /* sizes to heading width */
@@ -47,11 +49,11 @@ footer .footer-grid .info-block h3 {
   color: inherit;
 }
 
-footer .footer-grid .info-block h3::after {
+footer .info-block h3::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: -0.45rem;
+  bottom: -0.2rem;
   /* spacing under the heading */
   width: 50%;
   /* slightly longer than the heading */
@@ -61,23 +63,42 @@ footer .footer-grid .info-block h3::after {
   border-radius: 2px;
 }
 
+footer .footer-content>p {
+  font-size: 1rem;
+}
+
+@media (max-width: 1080px) {
+  footer .footer-content .footer-grid-1-3 {
+    grid-template-columns: 2fr 3fr;
+    align-items: center;
+  }
+}
+
 @media (max-width: 700px) {
-  footer .footer-content .footer-grid {
+  footer .footer-content .footer-grid-1-1 {
+    gap: 1.4rem;
+  }
+
+  footer .info-block h3 {
+    margin-bottom: 0.3rem;
+  }
+
+  footer .info-block h3::after {
+    width: 45%;
+    bottom: -0.1rem;
+  }
+}
+
+@media (max-width: 660px) {
+  footer .footer-content .footer-grid-1-3 {
     grid-template-columns: 1fr;
-    grid-template-rows: none;
   }
 
-  footer .footer-grid .logo {
-    grid-column: auto;
-    grid-row: auto;
+  footer .logo {
+    justify-items: center;
   }
 
-  footer .footer-grid .info-block h3 {
-    margin-bottom: 0.2rem;
-  }
-
-  footer .footer-grid .info-block h3::after {
-    width: 35%;
-    bottom: -0.35rem;
+  footer .footer-content>p {
+    font-size: 0.9rem;
   }
 }
