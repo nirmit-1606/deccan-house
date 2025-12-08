@@ -4,12 +4,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("hamburgerBtn");
     const nav = document.getElementById("mobileResponsive");
     const overlay = document.getElementById("navOverlay");
+    const isMobile = window.matchMedia("(max-width: 480px)");
 
     // Adjust main content padding to header height for mobile layouts
     function adjustPadding() {
-        if (window.matchMedia("(max-width: 480px)").matches) {
+        if (isMobile.matches) {
             const height = header.offsetHeight;
-            content.style.paddingTop = height + "px";
+            content.style.paddingTop = height - 2 + "px";
         } else {
             content.style.paddingTop = "0px";
         }
@@ -45,12 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let ticking = false;
 
     function onScroll() {
-        // If mobile menu is open, DO NOT animate header
-        if (header.dataset.menuOpen === "true") {
-            ticking = false;
-            return;
-        }
-
         const sc = Math.max(0, window.scrollY);
         const shrink = Math.min(1, sc / maxScroll);
 
