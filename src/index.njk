@@ -2,7 +2,7 @@
 layout: layout.njk
 title: Home
 ---
-<section class="hero">
+<section class="hero" style="background: url('{{ '/images/hero.jpg' | url }}') center/cover no-repeat;">
   <div class="hero-content">
     <h1>DECCAN HOUSE</h1>
     <h2>Now serving in Toronto!</h2>
@@ -24,7 +24,7 @@ title: Home
       <a href="/about/" class="btn secondary-btn">Explore Our Story</a>
     </div>
     <div class="col-img">
-      <img src="/images/MalaiChickenKebab.jpg">
+      <img src="{{ '/images/MalaiChickenKebab.jpg' | url }}">
     </div>
   </div>
 </section>
@@ -32,7 +32,7 @@ title: Home
 <section class="chefs-special">
   <div class="chefs-special-content">
     <div class="col-img">
-      <img src="/images/SpecialChickenDumBiryani.jpg">
+      <img src="{{ '/images/SpecialChickenDumBiryani.jpg' | url }}">
     </div>
     <div class="col-content">
       <h2>Chef's Special:</h2>
@@ -44,31 +44,31 @@ title: Home
 <section class="menu-carousal">
   <div class="carousal-track">
     <span>Chicken Biryani</span>
-    <object data="/images/icons/food-dish-hand-serve-icon.svg" type="image/svg+xml" class="carousal-icon"></object>
+    <img src="{{ '/images/icons/food-dish-hand-serve-icon.svg' | url }}" class="carousal-icon">
     
     <span>Dosa</span>
-    <object data="/images/icons/Fork-n-spoon-icon.svg" type="image/svg+xml" class="carousal-icon"></object>
+    <img src="{{ '/images/icons/Fork-n-spoon-icon.svg' | url }}" class="carousal-icon">
     
     <span>Idli</span>
-    <object data="/images/icons/food-dish-hand-serve-icon.svg" type="image/svg+xml" class="carousal-icon"></object>
-    
+    <img src="{{ '/images/icons/food-dish-hand-serve-icon.svg' | url }}" class="carousal-icon">
+
     <span>Chicken 65</span>
-    <object data="/images/icons/Fork-n-spoon-icon.svg" type="image/svg+xml" class="carousal-icon"></object>
+    <img src="{{ '/images/icons/Fork-n-spoon-icon.svg' | url }}" class="carousal-icon">
 
     <span>Butter Chicken</span>
-    <object data="/images/icons/food-dish-hand-serve-icon.svg" type="image/svg+xml" class="carousal-icon"></object>
+    <img src="{{ '/images/icons/food-dish-hand-serve-icon.svg' | url }}" class="carousal-icon">
 
     <span>Curry Puff</span>
-    <object data="/images/icons/Fork-n-spoon-icon.svg" type="image/svg+xml" class="carousal-icon"></object>
+    <img src="{{ '/images/icons/Fork-n-spoon-icon.svg' | url }}" class="carousal-icon">
 </section>
 
 <section class="food-images">
   <div class="food-images-content">
-    <img src="/images/food/EggFriedBiryani.jpg">
-    <img src="/images/food/ChaiMalaiBunCombo.jpg">
-    <img src="/images/food/ButterChicken.jpg">
-    <img src="/images/food/Idly.jpg">
-    <img src="/images/food/Chicken65.jpg">
-    <img src="/images/food/Dosa.jpg">
+    <img src="{{ '/images/food/EggFriedBiryani.jpg' | url }}">
+    <img src="{{ '/images/food/ChaiMalaiBunCombo.jpg' | url }}">
+    <img src="{{ '/images/food/ButterChicken.jpg' | url }}">
+    <img src="{{ '/images/food/Idly.jpg' | url }}">
+    <img src="{{ '/images/food/Chicken65.jpg' | url }}">
+    <img src="{{ '/images/food/Dosa.jpg' | url }}">
   </div>
 </section>

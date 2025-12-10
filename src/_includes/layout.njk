@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ title or "Deccan House" }}</title>
-  <link rel="stylesheet" href="/css/style.css">
-  <link rel="stylesheet" href="/css/about.css">
-  <link rel="stylesheet" href="/css/menu.css">
-  <link rel="stylesheet" href="/css/header.css">
-  <link rel="stylesheet" href="/css/footer.css">
+  <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/about.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/menu.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/header.css' | url }}">
+  <link rel="stylesheet" href="{{ '/css/footer.css' | url }}">
 </head>
 <body>
   {% include "partials/header.njk" %}
@@ -18,14 +18,14 @@
   </main>
   {% include "partials/footer.njk" %}
 
-  <script src="/js/header.js"></script>
+  <script src="{{ '/js/header.js' | url }}"></script>
 
   {% if page.fileSlug == "" %}
-    <script src="/js/carousal.js"></script>
+    <script src="{{ '/js/carousal.js' | url }}"></script>
   {% endif %}
 
   {% if page.fileSlug == "menu" %}
-    <script src="/js/menu.js"></script>
+    <script src="{{ '/js/menu.js' | url }}"></script>
   {% endif %}
 </body>
 </html>

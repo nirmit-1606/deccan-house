@@ -1,5 +1,3 @@
-const { DateTime } = require("luxon");
-
 module.exports = function(eleventyConfig) {
   // Copy CSS to the output folder
   eleventyConfig.addPassthroughCopy("css");
@@ -13,6 +11,7 @@ module.exports = function(eleventyConfig) {
       data: "_data",
       output: "_site"
     },
+    pathPrefix: "/deccan-house/",
     templateFormats: ["njk", "html", "md"],
     htmlTemplateEngine: "njk"
   };
