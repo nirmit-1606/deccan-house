@@ -52,13 +52,13 @@ footer .info-block h3 {
 footer .info-block h3::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: -6px;
   bottom: -0.2rem;
   /* spacing under the heading */
   width: 50%;
   /* slightly longer than the heading */
   height: 0.15rem;
-  background: #F8E39D;
+  background: #FE854D;
   /* adjust color/opacity to taste */
   border-radius: 2px;
 }
