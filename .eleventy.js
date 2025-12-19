@@ -11,7 +11,6 @@ module.exports = function(eleventyConfig) {
       data: "_data",
       output: "_site"
     },
-    pathPrefix: "/deccan-house/",
     templateFormats: ["njk", "html", "md"],
     htmlTemplateEngine: "njk"
   };
