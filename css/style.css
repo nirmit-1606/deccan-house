@@ -137,6 +137,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+  line-height: 1.5;
+  font-size: 1.05rem;
 }
 
 .col-img {
