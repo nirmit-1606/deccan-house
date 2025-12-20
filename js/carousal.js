@@ -10,32 +10,34 @@ document.addEventListener('DOMContentLoaded', function () {
     // ensure we don't loop forever per invocation — local safety cap
     function ensureTrackLength() {
         const containerWidth = container.clientWidth || 0;
-        // if already long enough, nothing to do
-        if (track.scrollWidth >= containerWidth * 2) return;
 
-        let safety = 0;
-        const maxSafety = 20; // clones-per-call cap
-        while (track.scrollWidth < containerWidth * 2 && safety < maxSafety) {
-            originals.forEach(node => track.appendChild(node.cloneNode(true)));
-            safety++;
+        // If not enough width, clone until we have at least two viewport-widths of content
+        if (track.scrollWidth < containerWidth * 2) {
+            let safety = 0;
+            const maxSafety = 20; // clones-per-call cap
+            while (track.scrollWidth < containerWidth * 2 && safety < maxSafety) {
+                originals.forEach(node => track.appendChild(node.cloneNode(true)));
+                safety++;
+            }
         }
-
-        // give browser a moment to layout (images/SVGs) then start animation
-        // requestAnimationFrame used to ensure layout pass has run
-        requestAnimationFrame(() => {
-            // small extra delay to let external SVGs/images settle if needed
-            setTimeout(() => {
-                track.style.animation = `carousal-scroll var(--scroll-duration, 40s) linear infinite`;
-            }, 50);
-        });
     }
 
-    // run after full load so external assets (object/svg/img) are sized
-    if (document.readyState === 'complete') {
+    function startAnimation() {
         ensureTrackLength();
+        // requestAnimationFrame to ensure layout has run. Small timeout helps when
+        // external images/SVGs still need to size on mobile browsers.
+        requestAnimationFrame(() => setTimeout(() => {
+            track.style.animation = `carousal-scroll var(--scroll-duration, 40s) linear infinite`;
+            track.style.animationPlayState = 'running';
+        }, 50));
+    }
+
+    // run animation after full load so external assets (object/svg/img) are sized
+    if (document.readyState === 'complete') {
+        startAnimation();
     } else {
-        window.addEventListener('load', ensureTrackLength, { once: true });
-        window.addEventListener('resize', ensureTrackLength);
+        window.addEventListener('load', startAnimation, { once: true });
+        window.addEventListener('resize', startAnimation);
     }
 
     // optional: pause animation on hover for better UX
