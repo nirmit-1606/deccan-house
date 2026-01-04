@@ -67,7 +67,7 @@ main {
   padding: 4rem 2rem;
   overflow: hidden;
   text-align: center;
-  color: #FEF7E0;
+  color: #FFE6CC;
   min-height: 88vh;
 }
 
@@ -107,6 +107,7 @@ main {
   object-fit: cover;
   z-index: 0;
   display: block;
+  filter: blur(2px);
 }
 
 .hero h2 {
@@ -187,14 +188,14 @@ main {
 }
 
 .chefs-special .col-content {
-  color: #FEF7E0;
+  color: #FFDBB5;
 }
 
 /* Carousal */
 
 .menu-carousal {
   background-color: #1C1F04;
-  color: #FEF7E0;
+  color: #FFDBB5;
   padding: 2rem 3rem;
   overflow: hidden;
   --scroll-duration: 40s;
