@@ -50,7 +50,7 @@
 }
 
 .category-dropdown-toggle svg {
-    transition: transform 220ms ease;
+    transition: transform 400ms ease;
     color: #F8FECD;
     margin-left: 1rem;
 }
