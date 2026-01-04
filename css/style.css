@@ -331,6 +331,10 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.2rem;
   }
+
+  .food-images img {
+    height: 220px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -346,6 +350,10 @@ main {
     padding: 4rem 0.75rem;
   }
 
+  .about, .chefs-special, .food-images {
+    padding: 4rem 1rem;
+  }
+
   .menu-carousal {
     font-size: medium;
   }
@@ -359,11 +367,11 @@ main {
   }
 
   .food-images .food-images-content {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 0.8rem;
   }
 
   .food-images img {
-    height: 180px;
+    height: 160px;
   }
 }
