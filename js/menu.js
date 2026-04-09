@@ -1,8 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
   const data = window.menuData;
 
-  // Extract unique categories
-  const categories = [...new Set(data.map(item => item.category))];
+  const CATEGORY_ORDER = [
+    "Breakfast",
+    "Snacks",
+    "Salad",
+    "Soups",
+    "Appetizers Veg",
+    "Appetizers Non-Veg",
+    "Tandoori Entries",
+    "Curries Veg",
+    "Curries Non-Veg",
+    "Deccan Specials",
+    "Deccan Mix Pulao",
+    "Biryani",
+    "Breads",
+    "Dessert",
+    "Drinks",
+  ];
+
+  const categories = CATEGORY_ORDER.filter(cat =>
+    data.some(item => item.category === cat)
+  );
 
   const categoriesContainer = document.getElementById("menu-categories");
   const itemsContainer = document.getElementById("menu-items");
@@ -100,7 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
   function displayItems(category, scrollToTop) {
     itemsContainer.innerHTML = "";
 
-    const filtered = data.filter(item => item.category === category);
+    const filtered = data
+      .filter(item => item.category === category)
+      .sort((a, b) => a.itemOrder - b.itemOrder);
 
     filtered.forEach(item => {
       const div = document.createElement("div");
