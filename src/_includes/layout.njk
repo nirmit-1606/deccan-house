@@ -30,6 +30,19 @@
   {% endif %}
 
   {% if page.fileSlug == "menu" %}
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script>
+      window.siteConfig = {
+        supabase: {
+          url: "{{ site.supabaseUrl }}",
+          anonKey: "{{ site.supabaseAnonKey }}"
+        },
+        tables: {
+          menuItems: "deccan_house_menu_items",
+          categories: "deccan_house_categories"
+        }
+      };
+    </script>
     <script src="{{ '/js/menu.js' | url }}"></script>
   {% endif %}
 </body>
