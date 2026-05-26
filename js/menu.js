@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function getHeaderHeight() { return headerEl?.offsetHeight ?? 0; }
 
   function updateTabsTop() {
-    tabsWrapEl.style.top = getHeaderHeight() + "px";
+    tabsWrapEl.style.top = (getHeaderHeight() - 1) + "px";
   }
 
   updateTabsTop();
