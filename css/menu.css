@@ -79,7 +79,7 @@
 .menu-section-heading {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #B87A0A;
+  color: #CC9800;
   letter-spacing: 0.03em;
   text-transform: uppercase;
   padding-bottom: 0.65rem;
@@ -139,7 +139,7 @@
   flex-shrink: 0;
   font-weight: 700;
   font-size: 0.95rem;
-  color: #E5530F;
+  color: #C26A00;
   padding-top: 0.1rem;
   white-space: nowrap;
 }
