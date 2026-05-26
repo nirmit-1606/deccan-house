@@ -67,7 +67,7 @@ header .hamburger {
 header .hamburger .bar {
   width: 25px;
   height: 2px;
-  background: #FEF7E0;
+  background: #FBC488;
   transition: all 0.3s ease;
 }
 
@@ -78,7 +78,7 @@ header nav {
 }
 
 header .nav__link {
-  color: #FBC488;
+  color: #FEF7E0;
   text-decoration: none;
   font-size: calc(var(--nav-font) - (var(--nav-font) - var(--nav-font-min)) * var(--shrink, 0));
   transition: font-size 180ms ease, padding 180ms ease, color 0.15s ease;
@@ -90,7 +90,7 @@ header .nav__link:hover {
 }
 
 header .nav__link--active {
-  color: #FEF7E0;
+  color: #FBC488;
   border-bottom: 2px solid currentColor;
 }
 
