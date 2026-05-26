@@ -113,6 +113,7 @@ main {
 .hero h2 {
   font-weight: normal;
   font-size: 2.5rem;
+  color: #FD7536;
 }
 
 .hero p {
@@ -153,6 +154,11 @@ main {
   gap: 1.5rem;
   line-height: 1.5;
   font-size: 1.05rem;
+}
+
+.col-content h2 {
+  font-size: 2rem;
+  line-height: 1.25;
 }
 
 .col-img {
@@ -200,7 +206,7 @@ main {
   overflow: hidden;
   --scroll-duration: 40s;
 
-  font-size: x-large;
+  font-size: 1.5rem;
   font-weight: 600;
 }
 
@@ -302,9 +308,13 @@ main {
     width: 100%;
   }
 
+  .col-content h2 {
+    font-size: 1.75rem;
+  }
+
   .menu-carousal {
     padding: 1rem 2rem;
-    font-size: large;
+    font-size: 1.2rem;
   }
 
   .menu-carousal .carousal-track {
@@ -348,8 +358,20 @@ main {
     padding: 4rem 1rem;
   }
 
+  .col-content {
+    font-size: 1rem;
+  }
+
+  .col-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .about-subheading {
+    font-size: 1rem;
+  }
+
   .menu-carousal {
-    font-size: medium;
+    font-size: 1rem;
   }
 
   .menu-carousal .carousal-track {
@@ -466,6 +488,14 @@ main {
 }
 
 /* ─── Typography helpers ─── */
+
+.about-subheading {
+  display: block;
+  margin-top: 0.35rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #6B7621;
+}
 
 .chefs-dish-name {
   color: #ECC853;
