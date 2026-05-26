@@ -2,28 +2,64 @@
 layout: layout.njk
 title: About Us
 ---
-<section class="title">
-  <div class="content">
-    <h1>
-      <span>Deccan House</span>
-      About Us
-    </h1>
-    <img src="{{ '/images/about/spices-and-herbs.png' | url }}">
+
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <div class="about-hero-text">
+      <span class="about-eyebrow">Deccan House</span>
+      <h1>Our Story</h1>
+      <p class="about-hero-tagline">Bringing the royal flavours of Hyderabad to the heart of Toronto.</p>
+    </div>
+    <div class="about-hero-img">
+      <img src="{{ '/images/about/spices-and-herbs.png' | url }}" alt="Spices and herbs">
+    </div>
   </div>
 </section>
 
-<section class="about-story">
-  <div class="about-story-content">
-    <h2>A Slice of Hyderabad in Toronto!</h2>
-    <p>
-      Step into a world where tradition meets flavor, 
-      and every bite tells a story. At Deccan House, 
-      we bring the rich culinary heritage of Hyderabad straight to your plate. 
-      From the smoky aromas of the famous Dum Biryani to the irresistible 
-      sweetness of Qubani ka Meetha, our menu celebrates the timeless recipes 
-      that have been passed down through generations.
-    </p>
+<section class="about-body">
+  <img src="{{ '/images/about/coriander-leaves.png' | url }}" class="about-deco about-deco--top" alt="">
+  <img src="{{ '/images/about/chili-peppers.PNG' | url }}" class="about-deco about-deco--bottom" alt="">
+  <div class="about-body-inner">
+    <div class="about-body-text reveal reveal--up">
+      <h2>A Slice of Hyderabad in Toronto</h2>
+      <p>Step into a world where tradition meets flavour, and every bite tells a story. At Deccan House, we bring the rich culinary heritage of Hyderabad straight to your plate.</p>
+      <p>From the smoky aromas of the famous Dum Biryani to the irresistible sweetness of Qubani ka Meetha, our menu celebrates the timeless recipes passed down through generations.</p>
+      <p>Every dish is a tribute to the Nizami kitchens of old — slow-cooked, hand-crafted, and served with the warmth of home-style hospitality.</p>
+    </div>
   </div>
-  <img src="{{ '/images/about/coriander-leaves.png' | url }}" class="coriander-img">
-  <img src="{{ '/images/about/chili-peppers.PNG' | url }}" class="chilli-img">
 </section>
+
+<section class="about-pillars">
+  <div class="about-pillars-inner">
+    <div class="about-pillar reveal reveal--up">
+      <h3>Hyderabadi Heritage</h3>
+      <p>Authentic flavours from the city of Nizams — nothing lost in translation, everything preserved.</p>
+    </div>
+    <div class="about-pillar reveal reveal--up reveal--d1">
+      <h3>Slow-Cooked Tradition</h3>
+      <p>Dum cooking, hand-pressed kebabs, and methods passed down through generations of master cooks.</p>
+    </div>
+    <div class="about-pillar reveal reveal--up reveal--d2">
+      <h3>Toronto Proud</h3>
+      <p>Rooted in Hyderabad, grown in Canada — bringing the taste of home to every table we serve.</p>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in-view'); });
+      return;
+    }
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+  })();
+</script>
