@@ -1,3 +1,28 @@
+## [1.4.0] - 2026-05-29
+
+### Added
+- Menu page redesign: section-scroll layout, sticky tab strip synced to header height via `ResizeObserver`, full-bleed category dividers, saffron-orange prices and warm gold section titles.
+- Homepage animations: hero stagger fade-up on load, scroll-reveal (left/right/up) on about, chef's special and food sections, food image hover zoom.
+- About page redesign: hero banner with eyebrow label, centred story section with decorative coriander/chilli PNGs (responsive opacity), three-pillar values strip.
+- Responsive type scale: explicit `rem` font sizes replacing CSS keyword values, explicit `col-content h2` sizing across all breakpoints, hero h2 accent colour.
+- `prefers-reduced-motion` support: all animations and transitions disabled for users who opt out.
+
+### Changed
+- Nav link colours swapped: inactive links use light text, active page link uses accent peach.
+- Hamburger and close button colours updated to match active nav colour.
+- Footer modernised with mobile-first layout; max-width aligned to `1400px` to match all other content containers.
+- About subheading introduced for second heading line — smaller weight and olive colour to reduce visual weight.
+- Price colour changed from primary green to saffron-orange to distinguish from category identity.
+- Category title colour lightened to warm gold, clearly distinct from price colour.
+
+### Fixed
+- Mobile header height locked at minimum — no shrink animation on scroll, preventing gap between header and sticky tab strip on page refresh.
+- 1px gap between header and tab strip on deccan-house resolved by subtracting 1px in `updateTabsTop`.
+- Tab active state no longer hijacked by intermediate sections during smooth scroll — `suppressObserver` guard added.
+- Hover opacity no longer sticks on mobile after tap — hover effect restricted to `@media (hover: hover)`.
+- Carousel `</div>` closing tag was missing, causing JS duplication to silently fail.
+- Inline styles replaced with CSS classes throughout homepage template.
+
 ## [1.3.0] - 2026-05-17
 
 ### Added
