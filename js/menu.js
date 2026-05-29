@@ -1,164 +1,189 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  const tabsEl     = document.getElementById("menu-tabs");
+  const tabsWrapEl = document.getElementById("menu-tabs-wrap");
+  const sectionsEl = document.getElementById("menu-sections");
+  const loadingEl  = document.getElementById("menu-loading");
+  const headerEl   = document.querySelector("header");
+
+  // ── Fetch data ─────────────────────────────────────────
+
   const { url, anonKey } = window.siteConfig.supabase;
-  const headers = { apikey: anonKey, Authorization: `Bearer ${anonKey}` };
+  const headers = {
+    apikey: anonKey,
+    Authorization: `Bearer ${anonKey}`,
+  };
 
-  const { menuItems: miTable, categories: catTable } = window.siteConfig.tables;
-  const [catRes, itemsRes] = await Promise.all([
-    fetch(
-      `${url}/rest/v1/${catTable}?select=name,display_order&visible=eq.true&order=display_order`,
-      { headers }
-    ),
-    fetch(
-      `${url}/rest/v1/${miTable}?select=name,price,category,item_order,description&available=eq.true`,
-      { headers }
-    ),
-  ]);
+  let categories = [];
+  let items = [];
 
-  const catData   = await catRes.json();
-  const itemsData = await itemsRes.json();
+  try {
+    const { menuItems: miTable, categories: catTable } = window.siteConfig.tables;
+    const [catRes, itemsRes] = await Promise.all([
+      fetch(`${url}/rest/v1/${catTable}?select=name,display_order&visible=eq.true&order=display_order`, { headers }),
+      fetch(`${url}/rest/v1/${miTable}?select=id,name,price,category,item_order,description&available=eq.true`, { headers }),
+    ]);
 
-  // Normalise item_order to itemOrder to match existing display logic
-  const data       = itemsData.map((i) => ({ ...i, itemOrder: i.item_order }));
-  const categories = catData.map((c) => c.name);
+    if (!catRes.ok || !itemsRes.ok) throw new Error("fetch failed");
 
-  const categoriesContainer = document.getElementById("menu-categories");
-  const itemsContainer      = document.getElementById("menu-items");
-
-  // Create a custom dropdown for mobile devices
-  const mobileDropdownWrapper = document.createElement("div");
-  mobileDropdownWrapper.className = "category-dropdown-wrapper";
-  const mobileToggle = document.createElement("button");
-  mobileToggle.className = "category-dropdown-toggle";
-  mobileToggle.setAttribute("aria-haspopup", "listbox");
-  mobileToggle.setAttribute("aria-expanded", "false");
-
-  mobileToggle.innerHTML = `
-    <span class="category-dropdown-label">Categories</span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down-icon" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-  `;
-
-  const mobileList = document.createElement("ul");
-  mobileList.className = "category-dropdown-list";
-  mobileList.setAttribute("role", "listbox");
-
-  mobileDropdownWrapper.appendChild(mobileToggle);
-  mobileDropdownWrapper.appendChild(mobileList);
-  categoriesContainer.parentNode.insertBefore(mobileDropdownWrapper, categoriesContainer);
-
-  // Create category buttons
-  categories.forEach((cat) => {
-    const btn = document.createElement("button");
-    btn.className = "category-btn";
-    btn.innerText = cat;
-    btn.dataset.category = cat;
-    btn.addEventListener("click", () => selectCategory(cat, true));
-    categoriesContainer.appendChild(btn);
-
-    const li = document.createElement("li");
-    li.className = "category-dropdown-item";
-    li.setAttribute("role", "option");
-    li.tabIndex = 0;
-    li.innerText = cat;
-    li.dataset.category = cat;
-    li.setAttribute("aria-selected", "false");
-    li.addEventListener("click", () => { selectCategory(cat, true); closeDropdown(); });
-    li.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        selectCategory(cat, true);
-        closeDropdown();
-      }
-    });
-    mobileList.appendChild(li);
-  });
-
-  function selectCategory(category, scrollToTop) {
-    const labelEl = mobileToggle.querySelector(".category-dropdown-label");
-    if (labelEl && labelEl.innerText !== category) labelEl.innerText = category;
-
-    document.querySelectorAll(".category-btn").forEach((b) => {
-      b.classList.toggle("active", b.dataset.category === category);
-    });
-
-    mobileList.querySelectorAll(".category-dropdown-item").forEach((li) => {
-      const active = li.dataset.category === category;
-      li.classList.toggle("active", active);
-      li.setAttribute("aria-selected", String(active));
-    });
-
-    displayItems(category, scrollToTop);
+    const catsData = await catRes.json();
+    items      = await itemsRes.json();
+    categories = catsData.map((c) => c.name).filter((cat) => items.some((i) => i.category === cat));
+  } catch {
+    loadingEl.textContent = "Unable to load menu. Please try again later.";
+    return;
   }
 
-  if (categories.length) selectCategory(categories[0], false);
+  loadingEl.remove();
 
-  function displayItems(category, scrollToTop) {
-    itemsContainer.innerHTML = "";
+  // ── Build tabs ─────────────────────────────────────────
 
-    data
-      .filter((item) => item.category === category)
-      .sort((a, b) => a.itemOrder - b.itemOrder)
+  categories.forEach((cat, idx) => {
+    const btn = document.createElement("button");
+    btn.className   = "menu-tab" + (idx === 0 ? " menu-tab--active" : "");
+    btn.textContent = cat;
+    btn.dataset.category = cat;
+    btn.setAttribute("role", "tab");
+    btn.setAttribute("aria-selected", idx === 0 ? "true" : "false");
+    btn.addEventListener("click", () => scrollToSection(cat));
+    tabsEl.appendChild(btn);
+  });
+
+  // ── Build sections ─────────────────────────────────────
+
+  categories.forEach((cat) => {
+    const section = document.createElement("section");
+    section.className       = "menu-section";
+    section.id              = `cat-${slugify(cat)}`;
+    section.dataset.category = cat;
+
+    const heading = document.createElement("h3");
+    heading.className   = "menu-section-heading";
+    heading.textContent = cat;
+    section.appendChild(heading);
+
+    const list = document.createElement("ul");
+    list.className = "menu-item-list";
+
+    items
+      .filter((i) => i.category === cat)
+      .sort((a, b) => a.item_order - b.item_order)
       .forEach((item) => {
-        const div = document.createElement("div");
-        div.className = "menu-item";
-        div.innerHTML = `
-          <div class="item-row">
-            <span class="item-name">${item.name}</span>
-            <span class="dots"></span>
-            <span class="item-price">$${Number(item.price).toFixed(2)}</span>
+        const li = document.createElement("li");
+        li.className = "menu-item";
+        li.innerHTML = `
+          <div class="item-main">
+            <span class="item-name">${escHtml(item.name)}</span>
+            ${item.description ? `<p class="item-desc">${escHtml(item.description)}</p>` : ""}
           </div>
-          ${item.description ? `<p class="item-desc">${item.description}</p>` : ""}
+          <span class="item-price">$${Number(item.price).toFixed(2)}</span>
         `;
-        itemsContainer.appendChild(div);
+        list.appendChild(li);
       });
 
-    if (scrollToTop) {
-      try {
-        const menuSection = document.querySelector(".menu");
-        const header      = document.querySelector("header");
-        const offset      = header ? header.offsetHeight : 0;
-        if (menuSection) {
-          const target = menuSection.getBoundingClientRect().top + window.scrollY - offset - 8;
-          window.scrollTo({ top: target, behavior: "smooth" });
-        }
-      } catch (e) { /* ignore */ }
-    }
+    section.appendChild(list);
+    sectionsEl.appendChild(section);
+  });
+
+  // ── Sticky tab-strip offset ────────────────────────────
+
+  function getHeaderHeight() { return headerEl?.offsetHeight ?? 0; }
+
+  function updateTabsTop() {
+    tabsWrapEl.style.top = (getHeaderHeight() - 1) + "px";
   }
 
-  function openDropdown() {
-    mobileDropdownWrapper.classList.add("open");
-    mobileToggle.setAttribute("aria-expanded", "true");
+  updateTabsTop();
+
+  // ── scroll-margin-top for sections ────────────────────
+
+  function updateScrollMargins() {
+    const offset = getHeaderHeight() + (tabsWrapEl?.offsetHeight ?? 0) + 8;
+    document.querySelectorAll(".menu-section").forEach((s) => {
+      s.style.scrollMarginTop = offset + "px";
+    });
   }
 
-  function closeDropdown() {
-    mobileDropdownWrapper.classList.remove("open");
-    mobileToggle.setAttribute("aria-expanded", "false");
+  updateScrollMargins();
+
+  // ── IntersectionObserver — active tab sync ─────────────
+
+  function buildObserver() {
+    const topGutter = getHeaderHeight() + (tabsWrapEl?.offsetHeight ?? 0);
+    return new IntersectionObserver(
+      (entries) => {
+        if (suppressObserver) return;
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveTab(entry.target.dataset.category);
+        });
+      },
+      {
+        rootMargin: `-${topGutter}px 0px -55% 0px`,
+        threshold: 0,
+      }
+    );
   }
 
-  mobileToggle.addEventListener("click", () => {
-    mobileDropdownWrapper.classList.contains("open") ? closeDropdown() : openDropdown();
+  let observer = buildObserver();
+  document.querySelectorAll(".menu-section").forEach((s) => observer.observe(s));
+
+  // ResizeObserver on header — fires on both scroll-shrink and viewport resize,
+  // keeping the tab strip top and scroll margins in sync at all times.
+  if (headerEl) {
+    const headerRO = new ResizeObserver(() => {
+      updateTabsTop();
+      updateScrollMargins();
+    });
+    headerRO.observe(headerEl);
+  }
+
+  // Rebuild IntersectionObserver on viewport resize so rootMargin stays accurate
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      observer.disconnect();
+      observer = buildObserver();
+      document.querySelectorAll(".menu-section").forEach((s) => observer.observe(s));
+    }, 200);
   });
 
-  document.addEventListener("click", (e) => {
-    if (!mobileDropdownWrapper.contains(e.target)) closeDropdown();
-  });
+  // ── Helpers ────────────────────────────────────────────
 
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeDropdown();
-  });
+  // Guard: while the user triggered a programmatic scroll, suppress the
+  // IntersectionObserver so intermediate sections don't steal the active tab.
+  let suppressObserver = false;
+  let suppressTimer;
 
-  // Sticky dropdown beneath the header on mobile
-  (function setStickyOffset() {
-    try {
-      const header = document.querySelector("header");
-      const offset = header ? header.offsetHeight : 0;
-      mobileDropdownWrapper.style.position = "sticky";
-      mobileDropdownWrapper.style.top      = offset + "px";
-      mobileDropdownWrapper.style.zIndex   = 10;
-    } catch (e) { /* noop */ }
-  })();
+  function setActiveTab(cat) {
+    tabsEl.querySelectorAll(".menu-tab").forEach((btn) => {
+      const active = btn.dataset.category === cat;
+      btn.classList.toggle("menu-tab--active", active);
+      btn.setAttribute("aria-selected", String(active));
+      if (active) {
+        btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      }
+    });
+  }
 
-  window.addEventListener("scroll", () => {
-    const header = document.querySelector("header");
-    mobileDropdownWrapper.style.top = (header ? header.offsetHeight : 0) + "px";
-  });
+  function scrollToSection(cat) {
+    // Immediately reflect the clicked tab, then ignore observer during scroll.
+    setActiveTab(cat);
+    suppressObserver = true;
+    clearTimeout(suppressTimer);
+    suppressTimer = setTimeout(() => { suppressObserver = false; }, 1000);
+    const section = document.getElementById(`cat-${slugify(cat)}`);
+    if (section) section.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function slugify(str) {
+    return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
 });
